@@ -3,13 +3,12 @@
 	import Calender from "svelte-material-icons/CalendarToday.svelte";
 	import High from "svelte-material-icons/ThermometerHigh.svelte";
 	import Low from "svelte-material-icons/ThermometerLow.svelte";
-	import Card from "./Card.svelte";
 	import Search from "svelte-material-icons/MapSearch.svelte";
 	import HPercent from "svelte-material-icons/WaterPercent.svelte";
 	import Prsr from "svelte-material-icons/CloudDownload.svelte";
 	import WSpeed from "svelte-material-icons/WeatherWindy.svelte";
-	import bg from "./bg.svg";
-
+	import Card from "./Card.svelte";
+	import Layout from "./Layout.svelte";
 	$: temp = "";
 	$: maxTemp = "";
 	$: minTemp = "";
@@ -82,40 +81,43 @@
 	};
 </script>
 
-<main>
-	<h1>Weather App</h1>
+<Layout>
+	<main>
+		<h1>Weather App</h1>
 
-	<input
-		type="search"
-		placeholder="Search here..."
-		on:keypress={handleSubmit}
-		value="london"
-	/>
-	<button on:click={handleclick}><Search width="25" height="22" /></button>
-	<div class="toggleTemperatureUnit">
-		<button on:click={(e) => handleTemperature(e)}>°F</button>
-		<button on:click={(e) => handleTemperature(e)}>°C</button>
-	</div>
+		<input
+			type="search"
+			placeholder="Search here..."
+			on:keypress={handleSubmit}
+			value="london"
+		/>
+		<button on:click={handleclick}><Search width="25" height="22" /></button>
+		<div class="toggleTemperatureUnit">
+			<button on:click={(e) => handleTemperature(e)}>°F</button>
+			<button on:click={(e) => handleTemperature(e)}>°C</button>
+		</div>
 
-	<Card>
-		<h2><Calender />Today's Temperature : {temp}</h2>
-		<span>
-			<img src={weatherIcon} alt="icon" />
-			<h4>{status}</h4>
-		</span>
-		<h3><MapMarker color="#00f5d4" /> Location : {fullLocation}</h3>
-		<h3 class="max"><High />Maximum Temperature : {maxTemp}</h3>
-		<h3 class="min"><Low />Minimum Temperature : {minTemp}</h3>
-		<h3><Prsr color="#0077b6" height="25" width="20" />Pressure : {pressure}</h3
-		>
-		<h3
-			><HPercent color="#264653" height="25" width="25" />Humidity : {humidity}</h3
-		>
-		<h3
-			><WSpeed color="#ccc" height="25" width="25" />Wind Speed : {windSpeed}</h3
-		>
-	</Card>
-</main>
+		<Card>
+			<h2><Calender />Today's Temperature : {temp}</h2>
+			<span>
+				<img src={weatherIcon} alt="icon" />
+				<h4>{status}</h4>
+			</span>
+			<h3><MapMarker color="#00f5d4" /> Location : {fullLocation}</h3>
+			<h3 class="max"><High />Maximum Temperature : {maxTemp}</h3>
+			<h3 class="min"><Low />Minimum Temperature : {minTemp}</h3>
+			<h3
+				><Prsr color="#0077b6" height="25" width="20" />Pressure : {pressure}</h3
+			>
+			<h3
+				><HPercent color="#264653" height="25" width="25" />Humidity : {humidity}</h3
+			>
+			<h3
+				><WSpeed color="#ccc" height="25" width="25" />Wind Speed : {windSpeed}</h3
+			>
+		</Card>
+	</main>
+</Layout>
 
 <style>
 	main {
@@ -124,10 +126,6 @@
 		max-width: 240px;
 		margin: 0 auto;
 		color: aliceblue;
-	}
-
-	:global(body) {
-		background-image: url("./bg.svg");
 	}
 
 	h2 {
