@@ -1,4 +1,15 @@
 <script>
+	import MapMarker from "svelte-material-icons/MapMarker.svelte";
+	import Calender from "svelte-material-icons/CalendarToday.svelte";
+	import High from "svelte-material-icons/ThermometerHigh.svelte";
+	import Low from "svelte-material-icons/ThermometerLow.svelte";
+	import Card from "./Card.svelte";
+	import Search from "svelte-material-icons/MapSearch.svelte";
+	import HPercent from "svelte-material-icons/WaterPercent.svelte";
+	import Prsr from "svelte-material-icons/CloudDownload.svelte";
+	import WSpeed from "svelte-material-icons/WeatherWindy.svelte";
+	import bg from "./bg.svg";
+
 	$: temp = "";
 	$: maxTemp = "";
 	$: minTemp = "";
@@ -73,29 +84,37 @@
 
 <main>
 	<h1>Weather App</h1>
+
 	<input
 		type="search"
 		placeholder="Search here..."
 		on:keypress={handleSubmit}
 		value="london"
 	/>
-	<button on:click={handleclick}>🔍</button>
+	<button on:click={handleclick}><Search width="25" height="22" /></button>
 	<div class="toggleTemperatureUnit">
 		<button on:click={(e) => handleTemperature(e)}>°F</button>
 		<button on:click={(e) => handleTemperature(e)}>°C</button>
 	</div>
 
-	<h2>Today's Temperature : {temp}</h2>
-	<span>
-		<img src={weatherIcon} alt="icon" />
-		<h4>{status}</h4>
-	</span>
-	<h3>Location : {fullLocation}</h3>
-	<h3 class="max">Maximum Temperature : {maxTemp}</h3>
-	<h3 class="min">Minimum Temperature : {minTemp}</h3>
-	<h3>Pressure : {pressure}</h3>
-	<h3>Humidity : {humidity}</h3>
-	<h3>Wind Speed : {windSpeed}</h3>
+	<Card>
+		<h2><Calender />Today's Temperature : {temp}</h2>
+		<span>
+			<img src={weatherIcon} alt="icon" />
+			<h4>{status}</h4>
+		</span>
+		<h3><MapMarker color="#00f5d4" /> Location : {fullLocation}</h3>
+		<h3 class="max"><High />Maximum Temperature : {maxTemp}</h3>
+		<h3 class="min"><Low />Minimum Temperature : {minTemp}</h3>
+		<h3><Prsr color="#0077b6" height="25" width="20" />Pressure : {pressure}</h3
+		>
+		<h3
+			><HPercent color="#264653" height="25" width="25" />Humidity : {humidity}</h3
+		>
+		<h3
+			><WSpeed color="#ccc" height="25" width="25" />Wind Speed : {windSpeed}</h3
+		>
+	</Card>
 </main>
 
 <style>
@@ -108,15 +127,32 @@
 	}
 
 	:global(body) {
-		background-color: #2f2f2f;
+		background-image: url("./bg.svg");
+	}
+
+	h2 {
+		display: inline-flex;
+		align-items: center;
+		margin: 0 auto;
+	}
+
+	h3 {
+		display: flex;
+		align-items: center;
+		gap: 0.25em;
+		margin-inline: auto;
 	}
 
 	span {
 		display: flex;
-		margin: 0 auto;
-		width: 20em;
+		margin: 1em auto;
+		max-width: 20em;
 		align-items: center;
 		justify-content: center;
+		background-image: linear-gradient(to left, #f8bc5b, #f18e31);
+		border-radius: 1.5em;
+		padding: 0.5em;
+		z-index: 1;
 	}
 
 	h1 {
@@ -165,13 +201,19 @@
 	}
 
 	h4 {
-		color: rgb(163, 163, 163);
+		color: rgb(78, 78, 78);
 		text-transform: uppercase;
+	}
+
+	button {
+		width: 50px;
+		height: 50px;
 	}
 
 	@media (min-width: 640px) {
 		main {
 			max-width: none;
+			font-size: 1em;
 		}
 	}
 </style>
