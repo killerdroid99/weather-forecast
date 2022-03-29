@@ -1,6 +1,5 @@
-<div>
-	<slot />
-</div>
+<div />
+<slot />
 
 <style>
 	div {
@@ -10,5 +9,9 @@
 		top: 0;
 		background-image: url("./bg.svg");
 		z-index: -1;
+		background-size: cover;
+		background-position: center;
+		background-repeat: no-repeat;
+		margin: 0;
 	}
 </style>
