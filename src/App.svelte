@@ -8,7 +8,7 @@
 	import Prsr from "svelte-material-icons/CloudDownload.svelte";
 	import WSpeed from "svelte-material-icons/WeatherWindy.svelte";
 	import Card from "./Card.svelte";
-	import Layout from "./Layout.svelte";
+
 	$: temp = "";
 	$: maxTemp = "";
 	$: minTemp = "";
@@ -81,51 +81,53 @@
 	};
 </script>
 
-<Layout>
-	<main>
-		<h1>Weather App</h1>
+<main>
+	<h1 class="main-title">Weather App</h1>
 
-		<input
-			type="search"
-			placeholder="Search here..."
-			on:keypress={handleSubmit}
-			value="london"
-		/>
-		<button on:click={handleclick}><Search width="25" height="22" /></button>
-		<div class="toggleTemperatureUnit">
-			<button on:click={(e) => handleTemperature(e)}>°F</button>
-			<button on:click={(e) => handleTemperature(e)}>°C</button>
-		</div>
+	<input
+		type="search"
+		placeholder="Search here..."
+		on:keypress={handleSubmit}
+		value="london"
+	/>
+	<button on:click={handleclick}><Search width="25" height="22" /></button>
+	<div class="toggleTemperatureUnit">
+		<button on:click={(e) => handleTemperature(e)}>°F</button>
+		<button on:click={(e) => handleTemperature(e)}>°C</button>
+	</div>
 
-		<Card>
-			<h2><Calender />Today's Temperature : {temp}</h2>
-			<span>
-				<img src={weatherIcon} alt="icon" />
-				<h4>{status}</h4>
-			</span>
-			<h3><MapMarker color="#00f5d4" /> Location : {fullLocation}</h3>
-			<h3 class="max"><High />Maximum Temperature : {maxTemp}</h3>
-			<h3 class="min"><Low />Minimum Temperature : {minTemp}</h3>
-			<h3
-				><Prsr color="#0077b6" height="25" width="20" />Pressure : {pressure}</h3
-			>
-			<h3
-				><HPercent color="#264653" height="25" width="25" />Humidity : {humidity}</h3
-			>
-			<h3
-				><WSpeed color="#ccc" height="25" width="25" />Wind Speed : {windSpeed}</h3
-			>
-		</Card>
-	</main>
-</Layout>
+	<Card>
+		<h2><Calender />Today's Temperature : {temp}</h2>
+		<span>
+			<img src={weatherIcon} alt="icon" />
+			<h4>{status}</h4>
+		</span>
+		<h3><MapMarker color="#00f5d4" /> Location : {fullLocation}</h3>
+		<h3 class="max"><High />Maximum Temperature : {maxTemp}</h3>
+		<h3 class="min"><Low />Minimum Temperature : {minTemp}</h3>
+		<h3><Prsr color="#0077b6" height="25" width="20" />Pressure : {pressure}</h3
+		>
+		<h3
+			><HPercent color="#264653" height="25" width="25" />Humidity : {humidity}</h3
+		>
+		<h3
+			><WSpeed color="#ccc" height="25" width="25" />Wind Speed : {windSpeed}</h3
+		>
+	</Card>
+</main>
 
 <style>
 	main {
 		text-align: center;
 		padding: 1em;
-		max-width: 240px;
+		max-width: 640px;
 		margin: 0 auto;
 		color: aliceblue;
+	}
+
+	/* change body background color */
+	:global(body) {
+		background-color: #181a20;
 	}
 
 	h2 {
@@ -144,7 +146,7 @@
 	span {
 		display: flex;
 		margin: 1em auto;
-		max-width: 20em;
+		min-width: 15em;
 		align-items: center;
 		justify-content: center;
 		background-image: linear-gradient(to left, #f8bc5b, #f18e31);
@@ -208,10 +210,18 @@
 		height: 50px;
 	}
 
-	@media (min-width: 640px) {
+	@media (max-width: 940px) {
 		main {
-			max-width: none;
+			max-width: 450px;
 			font-size: 1em;
+		}
+
+		.main-title {
+			font-size: 2.5em;
+		}
+		span {
+			width: 12em;
+			height: 50px;
 		}
 	}
 </style>
